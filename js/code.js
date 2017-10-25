@@ -9,5 +9,5 @@ function create() {
     console.log("create")
 }
 function update() {
-    console.log("update")
+    console.log("This is Monster Jump")
 }
