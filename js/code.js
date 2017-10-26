@@ -42,7 +42,7 @@ function requestLock() {
 function move(pointer, x, y, click) {
     if (game.input.mouse.locked && !click)
     {
-        this.hero.x += game.input.mouse.event.movementX;
+        this.hero.x += (game.input.mouse.event.movementX)/10;
     }
 }
 
