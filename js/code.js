@@ -10,12 +10,10 @@ function preload() {
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    game.cameraYMin = 99999;
-    game.platformYMin = 99999;
-
-
     path = game.add.sprite(120,650,'path');
     path.scale.setTo(0.02)
+    game.physics.arcade.enable(path,Phaser.Physics.ARCADE);
+    path.body.immovable = true;
 
     monster = game.add.sprite(240,705,'monster');
     monster.scale.setTo(0.08)
@@ -30,13 +28,17 @@ function create() {
     ground = game.add.sprite(215,780,'ground');
     ground.scale.setTo(1)
     game.physics.arcade.enable(ground,Phaser.Physics.ARCADE);
-    s = game.add.tileSprite(0, 0, 800, 600, 'ground');
-
+    ground.body.immovable = true;
+    
     ground2 = game.add.sprite(0,780,'ground');
     ground2.scale.setTo(1)
-    game.physics.arcade.enable(ground2,Phaser.Physics.ARCADE);
-    s2 = game.add.tileSprite(0, 0, 800, 600, 'ground2');
+    game.physics.arcade.enable(ground2,Phaser.Physics.ARCADE)
+    ground2.body.immovable = true;
 
+    monster.body.checkCollision.up = false;
+    monster.body.checkCollision.left = false;
+    monster.body.checkCollision.right = false;
+  
     this.stage.backgroundColor = 'F9DD89'
     
 }
@@ -52,5 +54,8 @@ function move(pointer, x,y, click) {
     
     }
 function update() {
+    game.physics.arcade.collide(monster, ground);
+    game.physics.arcade.collide(monster, ground2);
+    game.physics.arcade.collide(monster, path);
     
 }
