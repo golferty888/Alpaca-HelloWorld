@@ -10,6 +10,10 @@ function preload() {
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
+    game.cameraYMin = 99999;
+    game.platformYMin = 99999;
+
+
     path = game.add.sprite(120,650,'path');
     path.scale.setTo(0.02)
 
@@ -26,10 +30,12 @@ function create() {
     ground = game.add.sprite(215,780,'ground');
     ground.scale.setTo(1)
     game.physics.arcade.enable(ground,Phaser.Physics.ARCADE);
+    s = game.add.tileSprite(0, 0, 800, 600, 'ground');
 
     ground2 = game.add.sprite(0,780,'ground');
     ground2.scale.setTo(1)
     game.physics.arcade.enable(ground2,Phaser.Physics.ARCADE);
+    s2 = game.add.tileSprite(0, 0, 800, 600, 'ground2');
 
     this.stage.backgroundColor = 'F9DD89'
     
