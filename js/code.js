@@ -6,14 +6,17 @@ function preload() {
     console.log("Hello")
     game.load.image('pro-hero', 'images/pro-hero.png');
     game.load.image('floor','images/floor.png')
+    game.load.image('floor','images/floor.png')
 }
 function create() {
     console.log("World")
     this.hero = game.add.sprite(game.world.centerX, game.world.centerY, 'pro-hero');
     this.floor = game.add.sprite(250,600,'floor')
+    this.floor2 = game.add.sprite(200,200,'floor')
     game.stage.backgroundColor = '#3E86F9';
     this.hero.scale.setTo(0.25,0.25)
     this.floor.scale.setTo(0.25,0.125)
+    this.floor2.scale.setTo(0.25,0.125)
     game.canvas.addEventListener('mousedown', requestLock);
     game.input.addMoveCallback(move, this);
 
