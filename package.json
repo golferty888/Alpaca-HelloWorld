@@ -2,7 +2,7 @@
   "dependencies": {
     "express": "^4.16.2"
   },
-  "name": "alpaca-helloworld",
+  "name": "game",
   "description": "Alpaca-HelloWorld",
   "version": "1.0.0",
   "main": "index.js",
