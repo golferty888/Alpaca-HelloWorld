@@ -7,6 +7,7 @@ function preload() {
     game.load.image('ground','picture/ground.png')
     game.load.image('path','picture/path.png')
 }
+
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -42,9 +43,11 @@ function create() {
     this.stage.backgroundColor = 'F9DD89'
     
 }
+
 function requestLock() {
     game.input.mouse.requestPointerLock();
 }
+
 function move(pointer, x,y, click) {
 
         if (game.input.mouse.locked && !click)
@@ -52,10 +55,25 @@ function move(pointer, x,y, click) {
             monster.x += game.input.mouse.event.movementX;
         }
     
-    }
+}
+
 function update() {
     game.physics.arcade.collide(monster, ground);
     game.physics.arcade.collide(monster, ground2);
     game.physics.arcade.collide(monster, path);
+
+    // if(game.physics.arcade.collide(monster,path)){
+    //     game.physics.arcade.collide(monster,path,jump)
+
+    //     monster.body.checkCollision.up = false;
+    //     monster.body.checkCollision.left = false;
+    //     monster.body.checkCollision.right = false;
+    // }
     
 }
+
+// function jump(){
+//     monster.body.velocity.y = monster.body.velocity.y + 450;
+//     monster.body.bounce.set(1)
+//     monster.body.gravity.y = 570
+// }
