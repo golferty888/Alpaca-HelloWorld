@@ -1,4 +1,4 @@
-var game = new Phaser.Game(600, 700, Phaser.AUTO, "game");
+var game = new Phaser.Game(600 , 800, Phaser.AUTO, "game");
 var main = { preload : preload , create: create , update : update};
 var background;
 game.state.add('main', main);
@@ -12,49 +12,57 @@ function preload() {
 }
 function create() {
     console.log("World")
+    game.physics.startSystem(Phaser.Physics.ARCADE);
     background = game.add.tileSprite(0,0,600,700,'background');
-    this.hero = game.add.sprite(game.world.centerX, game.world.centerY, 'pro-hero');
+    hero = game.add.sprite(game.world.centerX, game.world.centerY, 'pro-hero');
+    hero.scale.setTo(0.25,0.25)
+    game.physics.enable( hero, Phaser.Physics.ARCADE); 
+    //physics.arcade.enable( hero );
+    hero.body.gravity.y = 500;
+    hero.body.checkCollision.up = false;
+    hero.body.checkCollision.left = false;
+    hero.body.checkCollision.right = false;
+    hero.body.velocity.y = 500
+    hero.body.collideWorldBounds = true;    
+    hero.body.bounce.set(1);
+
     // this.floor = game.add.sprite(250,600,'floor')
     // this.floor2 = game.add.sprite(150,400,'floor')
-    this.floors = game.add.group()
-    this.floors.enableBody = true;
+    floors = game.add.group()
+    floors.enableBody = true;
+    //floors.scale.setTo(0.25,0.125)
+    floors.scale.set( 0.25,0.25 )
+    floors.physicsBodytype = Phaser.Physics.ARCADE;
     // floor1 = this.floors.create(250,600,'floor')
     // floor2 = this.floors.create(150,400,'floor')
     // game.stage.backgroundColor = '#3E86F9';
     // for (var i = 0; i < 16; i++)
     // {
-        this.floors.create(250,600, 'floor');
-        this.floors.create(400,700, 'floor');
+    // floor1 = floors.create(0,0, 'floor');
+    // floor2 = floors.create(400,500, 'floor');
+    // floor3 = floors.create(600,700, 'floor');
+    floor3 = floors.create(game.world.centerX, game.world.centerY, 'floor');
+
     // }
-    this.hero.scale.setTo(0.25,0.25)
-    this.floors.scale.setTo(0.25,0.125)
+   
+ 
     // floor2.scale.setTo(0.25,0.125)
     game.canvas.addEventListener('mousedown', requestLock);
     game.input.addMoveCallback(move, this);
 
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.physics.enable([this.hero,this.floors], Phaser.Physics.ARCADE);
+
+    //game.physics.enable([ hero, floors ], Phaser.Physics.ARCADE);
     // game.physics.enable([this.hero,floor2], Phaser.Physics.ARCADE);
-    this.floors.physicsBodytype = Phaser.Physics.ARCADE;
+    
     // floor2.physicsBodytype = Phaser.Physics.ARCADE;
 
-    this.physics.arcade.enable( this.hero );
-    this.hero.body.gravity.y = 500;
-    this.hero.body.checkCollision.up = false;
-    this.hero.body.checkCollision.left = false;
-    this.hero.body.checkCollision.right = false;
- 
+    //physics.arcade.enable( hero );
     
-    this.hero.body.velocity.y = 500
 
     // this.hero.body.velocity.setTo(200, 200);
     
     //  This makes the game world bounce-able
-    this.hero.body.collideWorldBounds = true;
     
-    //  This sets the image bounce energy for the horizontal  and vertical vectors (as an x,y point). "1" is 100% energy return
-    this.hero.body.bounce.set(1);
-
     //this.hero.body.gravity.set(0, 180);
 
     // this.floors.body.immovable == true;
@@ -75,11 +83,11 @@ function move(pointer, x, y, click) {
 
 function update() {
 
-    if(game.physics.arcade.collide(this.hero, this.floors)){
+    if(game.physics.arcade.collide(hero, floors)){
         background.tilePosition.y += 10;
     }
     
-    if(game.physics.arcade.collide(this.hero,this.floors)){
+    if(game.physics.arcade.collide(hero,floors)){
         background.tilePosition.y += 10;
     }
 }
