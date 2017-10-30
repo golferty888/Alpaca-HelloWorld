@@ -8,25 +8,35 @@ function preload() {
     game.load.image('background','images/stars.png')
     game.load.image('pro-hero', 'images/pro-hero.png');
     game.load.image('floor','images/floor.png')
-    game.load.image('floor','images/floor.png')
+    // game.load.image('floor','images/floor.png')
 }
 function create() {
     console.log("World")
     background = game.add.tileSprite(0,0,600,700,'background');
     this.hero = game.add.sprite(game.world.centerX, game.world.centerY, 'pro-hero');
-    this.floor = game.add.sprite(250,600,'floor')
-    this.floor2 = game.add.sprite(150,400,'floor')
-    // background = game.add.tileSprite(0,0,600,700,'background');
+    // this.floor = game.add.sprite(250,600,'floor')
+    // this.floor2 = game.add.sprite(150,400,'floor')
+    this.floors = game.add.group()
+    this.floors.enableBody = true;
+    // floor1 = this.floors.create(250,600,'floor')
+    // floor2 = this.floors.create(150,400,'floor')
     // game.stage.backgroundColor = '#3E86F9';
+    // for (var i = 0; i < 16; i++)
+    // {
+        this.floors.create(250,600, 'floor');
+        this.floors.create(400,700, 'floor');
+    // }
     this.hero.scale.setTo(0.25,0.25)
-    this.floor.scale.setTo(0.25,0.125)
-    this.floor2.scale.setTo(0.25,0.125)
+    this.floors.scale.setTo(0.25,0.125)
+    // floor2.scale.setTo(0.25,0.125)
     game.canvas.addEventListener('mousedown', requestLock);
     game.input.addMoveCallback(move, this);
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.physics.enable([this.hero,this.floor], Phaser.Physics.ARCADE);
-    game.physics.enable([this.hero,this.floor2], Phaser.Physics.ARCADE);
+    game.physics.enable([this.hero,this.floors], Phaser.Physics.ARCADE);
+    // game.physics.enable([this.hero,floor2], Phaser.Physics.ARCADE);
+    this.floors.physicsBodytype = Phaser.Physics.ARCADE;
+    // floor2.physicsBodytype = Phaser.Physics.ARCADE;
 
     this.physics.arcade.enable( this.hero );
     this.hero.body.gravity.y = 500;
@@ -47,8 +57,8 @@ function create() {
 
     //this.hero.body.gravity.set(0, 180);
 
-    this.floor.body.immovable = true;
-    this.floor2.body.immovable = true
+    // this.floors.body.immovable == true;
+    // floor2.body.immovable = true;
     // tilesprite.body.allowGravity = false;
 
 }
@@ -65,11 +75,11 @@ function move(pointer, x, y, click) {
 
 function update() {
 
-    if(game.physics.arcade.collide(this.hero, this.floor)){
+    if(game.physics.arcade.collide(this.hero, this.floors)){
         background.tilePosition.y += 10;
     }
     
-    if(game.physics.arcade.collide(this.hero,this.floor2)){
+    if(game.physics.arcade.collide(this.hero,this.floors)){
         background.tilePosition.y += 10;
     }
 }
