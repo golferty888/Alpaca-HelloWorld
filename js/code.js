@@ -1,19 +1,23 @@
 var game = new Phaser.Game(600, 700, Phaser.AUTO, "game");
 var main = { preload : preload , create: create , update : update};
+var background;
 game.state.add('main', main);
 game.state.start('main');
 function preload() {
     console.log("Hello")
+    game.load.image('background','images/stars.png')
     game.load.image('pro-hero', 'images/pro-hero.png');
     game.load.image('floor','images/floor.png')
     game.load.image('floor','images/floor.png')
 }
 function create() {
     console.log("World")
+    background = game.add.tileSprite(0,0,600,700,'background');
     this.hero = game.add.sprite(game.world.centerX, game.world.centerY, 'pro-hero');
     this.floor = game.add.sprite(250,600,'floor')
     this.floor2 = game.add.sprite(150,400,'floor')
-    game.stage.backgroundColor = '#3E86F9';
+    // background = game.add.tileSprite(0,0,600,700,'background');
+    // game.stage.backgroundColor = '#3E86F9';
     this.hero.scale.setTo(0.25,0.25)
     this.floor.scale.setTo(0.25,0.125)
     this.floor2.scale.setTo(0.25,0.125)
@@ -61,6 +65,11 @@ function move(pointer, x, y, click) {
 
 function update() {
 
-    game.physics.arcade.collide(this.hero, this.floor);
-    game.physics.arcade.collide(this.hero,this.floor2);
+    if(game.physics.arcade.collide(this.hero, this.floor)){
+        background.tilePosition.y += 10;
+    }
+    
+    if(game.physics.arcade.collide(this.hero,this.floor2)){
+        background.tilePosition.y += 10;
+    }
 }
