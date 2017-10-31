@@ -46,7 +46,7 @@ function create() {
     // floor2 = floors.create(400,500, 'floor');
     // floor3 = floors.create(600,700, 'floor');
     for (var i = 0; i < 5; i++){
-        let floor = floors.create( Math.random() * 500, Math.random() * 500, 'floor');
+        let floor = floors.create( Math.random() * 650, Math.random() * 650, 'floor');
         floor.body.immovable = true;
     }
     
@@ -86,7 +86,7 @@ function requestLock() {
 function move(pointer, x, y, click) {
     if (game.input.mouse.locked && !click)
     {
-        this.hero.x += (game.input.mouse.event.movementX)/10;
+        hero.x += (game.input.mouse.event.movementX)/10;
     }
 }
 
@@ -94,8 +94,5 @@ function update() {
     if(game.physics.arcade.collide(hero, floors)){
         background.tilePosition.y += 10;
     }
-    
-    if(game.physics.arcade.collide(hero,floors)){
-        background.tilePosition.y += 10;
-    }
+
 }
