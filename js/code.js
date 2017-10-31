@@ -29,13 +29,14 @@ function create() {
     // this.floor = game.add.sprite(250,600,'floor')
     // this.floor2 = game.add.sprite(150,400,'floor')
     floors = game.add.group()
-    floors.enableBody = true;
+    
     // floors.setAll('scale.X',0.25)
     // floors.setAll('scale.Y',0.25)
     // floors.scale.set(0.25,0.125)
     // floors.scale.set( 0.25,0.25 )
     
     floors.physicsBodytype = Phaser.Physics.ARCADE;
+    floors.enableBody = true;
     // floor1 = this.floors.create(250,600,'floor')
     // floor2 = this.floors.create(150,400,'floor')
     // game.stage.backgroundColor = '#3E86F9';
@@ -44,14 +45,17 @@ function create() {
     // floor1 = floors.create(0,0, 'floor');
     // floor2 = floors.create(400,500, 'floor');
     // floor3 = floors.create(600,700, 'floor');
-    floors.create(game.world.centerX*4, game.world.centerY*8, 'floor');
-
+    for (var i = 0; i < 5; i++){
+        let floor = floors.create( Math.random() * 500, Math.random() * 500, 'floor');
+        floor.body.immovable = true;
+    }
+    
+    
     
     
     // }
    
- 
-    floor2.scale.setTo(0.25,0.125)
+
     game.canvas.addEventListener('mousedown', requestLock);
     game.input.addMoveCallback(move, this);
 
