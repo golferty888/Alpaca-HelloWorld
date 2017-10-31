@@ -13,7 +13,7 @@ function preload() {
 function create() {
     console.log("World")
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    background = game.add.tileSprite(0,0,600,700,'background');
+    background = game.add.tileSprite(0,0,600,800,'background');
     hero = game.add.sprite(game.world.centerX, game.world.centerY, 'pro-hero');
     hero.scale.setTo(0.25,0.25)
     game.physics.enable( hero, Phaser.Physics.ARCADE); 
@@ -30,8 +30,11 @@ function create() {
     // this.floor2 = game.add.sprite(150,400,'floor')
     floors = game.add.group()
     floors.enableBody = true;
-    //floors.scale.setTo(0.25,0.125)
-    floors.scale.set( 0.25,0.25 )
+    // floors.setAll('scale.X',0.25)
+    // floors.setAll('scale.Y',0.25)
+    // floors.scale.set(0.25,0.125)
+    // floors.scale.set( 0.25,0.25 )
+    
     floors.physicsBodytype = Phaser.Physics.ARCADE;
     // floor1 = this.floors.create(250,600,'floor')
     // floor2 = this.floors.create(150,400,'floor')
@@ -41,12 +44,14 @@ function create() {
     // floor1 = floors.create(0,0, 'floor');
     // floor2 = floors.create(400,500, 'floor');
     // floor3 = floors.create(600,700, 'floor');
-    floor3 = floors.create(game.world.centerX, game.world.centerY, 'floor');
+    floors.create(game.world.centerX*4, game.world.centerY*8, 'floor');
 
+    
+    
     // }
    
  
-    // floor2.scale.setTo(0.25,0.125)
+    floor2.scale.setTo(0.25,0.125)
     game.canvas.addEventListener('mousedown', requestLock);
     game.input.addMoveCallback(move, this);
 
@@ -82,7 +87,6 @@ function move(pointer, x, y, click) {
 }
 
 function update() {
-
     if(game.physics.arcade.collide(hero, floors)){
         background.tilePosition.y += 10;
     }
